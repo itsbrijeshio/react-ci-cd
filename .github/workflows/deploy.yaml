@@ -74,7 +74,7 @@ jobs: # This is the list of jobs that will be run
             path: dist # This is the path to the artifact
 
   deploy: # This is the name of the job
-    needs: test # If this job needs another job to run, this is the job that will run first
+    needs: build # If this job needs another job to run, this is the job that will run first
     runs-on: ubuntu-latest # This is the OS that the workflow will run on
     steps:
       - name: Download Artifact
