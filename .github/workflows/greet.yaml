@@ -1,7 +1,7 @@
 name: "Greet" # This is the name of the workflow
 
 on: # This is the trigger for the workflow
-  - push # This is the trigger for the workflow
+  - workflow_dispatch # This is the trigger for the workflow
 
 jobs: # This is the list of jobs that will be run
   greet: # This is the name of the job
