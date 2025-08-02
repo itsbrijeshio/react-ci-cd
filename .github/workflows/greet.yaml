@@ -1,6 +1,4 @@
 name: "Greet" # This is the name of the workflow
-version: "0.0.1" # This is the version of the workflow
-description: "Greet the user" # This is the description of the workflow
 
 on: # This is the trigger for the workflow
   - push # This is the trigger for the workflow
