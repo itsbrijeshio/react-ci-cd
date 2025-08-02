@@ -10,25 +10,23 @@ jobs: # This is the list of jobs that will be run
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # This is the action that will be run
-      
+
       - name: Install Nodejs
         uses: actions/setup-node@v4 # This is the action that will be run
         with: # This is the options for the action
-          node-version: '20' # This is the version of Node that will be installed
-          cache: 'npm'
-        
+          node-version: "20" # This is the version of Node that will be installed
+          cache: "npm"
+
       - name: Node version
         run: node -v # This is the command that will be run
-      
+
       - name: Install Dependencies
-        run: npm ci 
-      
-      # - name: Build
-      #   run: npm run build
-      
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Deploy
         run: |
           echo "Deploying to production"
-          npm run dev 
-
-
+          echo "Deployed successfully!"
