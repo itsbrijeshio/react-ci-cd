@@ -1,8 +1,13 @@
 name: "Deploy" # This is the name of the workflow
 
 on: # This is the trigger for the workflow
-  - push # This is the trigger for the workflow
-  - workflow_dispatch # Manually trigger the workflow
+  push: # This is the trigger for the workflow
+    branches: [main] # This is the branch that the workflow will run on
+    paths-ignore: # This is the paths that the workflow will ignore
+      - "./github/workflows/**/**"
+      - "README.md"
+
+  workflow_dispatch: # Manually trigger the workflow
 
 jobs: # This is the list of jobs that will be run
   test:
