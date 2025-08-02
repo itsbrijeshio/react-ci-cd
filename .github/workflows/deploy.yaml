@@ -5,8 +5,7 @@ on: # This is the trigger for the workflow
   - workflow_dispatch # Manually trigger the workflow
 
 jobs: # This is the list of jobs that will be run
-  deploy: # This is the name of the job
-    # needs: test # If this job needs another job to run, this is the job that will run first
+  test:
     runs-on: ubuntu-latest # This is the OS that the workflow will run on
     steps:
       - name: Checkout code
@@ -16,7 +15,29 @@ jobs: # This is the list of jobs that will be run
         uses: actions/setup-node@v4 # This is the action that will be run
         with: # This is the options for the action
           node-version: "20" # This is the version of Node that will be installed
-          cache: "npm"
+
+      - name: Node version
+        run: node -v # This is the command that will be run
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Test
+        run: |
+          npm run test
+          echo "Tests passed!"
+
+  deploy: # This is the name of the job
+    needs: test # If this job needs another job to run, this is the job that will run first
+    runs-on: ubuntu-latest # This is the OS that the workflow will run on
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # This is the action that will be run
+
+      - name: Install Nodejs
+        uses: actions/setup-node@v4 # This is the action that will be run
+        with: # This is the options for the action
+          node-version: "20" # This is the version of Node that will be installed
 
       - name: Node version
         run: node -v # This is the command that will be run
