@@ -80,7 +80,7 @@ jobs: # This is the list of jobs that will be run
       - name: Download Artifact
         uses: actions/download-artifact@v4 # This is the action that will be run
         with: # This is the options for the action
-          - name: dist-files # This is the name of the artifact
-            path: dist # This is the path to the artifact
+          name: dist-files # This is the name of the artifact
+          path: dist # This is the path to the artifact
       - name: Deploy
         run: echo "Deployment successful!"
