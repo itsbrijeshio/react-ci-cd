@@ -21,7 +21,6 @@ jobs: # This is the list of jobs that will be run
         with: # This is the options for the action
           path: ~/.npm # This is the path to the directory that will be cached
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} #
-          run: echo "Caching dependencies..."
 
       - name: Install Nodejs
         uses: actions/setup-node@v4 # This is the action that will be run
@@ -39,7 +38,7 @@ jobs: # This is the list of jobs that will be run
           npm run test
           echo "Tests passed!"
 
-  deploy: # This is the name of the job
+  build:
     needs: test # If this job needs another job to run, this is the job that will run first
     runs-on: ubuntu-latest # This is the OS that the workflow will run on
     steps:
@@ -64,9 +63,24 @@ jobs: # This is the list of jobs that will be run
         run: npm ci
 
       - name: Build
-        run: npm run build
-
-      - name: Deploy
         run: |
-          echo "Deploying to production"
-          echo "Deployed successfully!"
+          npm run build
+          echo "Build successful!"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4 # This is the action that will be run
+        with: # This is the options for the action
+          - name: dist-files # This is the name of the artifact
+            path: dist # This is the path to the artifact
+
+  deploy: # This is the name of the job
+    needs: test # If this job needs another job to run, this is the job that will run first
+    runs-on: ubuntu-latest # This is the OS that the workflow will run on
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4 # This is the action that will be run
+        with: # This is the options for the action
+          - name: dist-files # This is the name of the artifact
+            path: dist # This is the path to the artifact
+      - name: Deploy
+        run: echo "Deployment successful!"
