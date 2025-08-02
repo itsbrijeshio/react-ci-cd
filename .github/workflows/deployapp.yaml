@@ -3,7 +3,7 @@ name: "Deploy App" # This is the name of the workflow
 on: # This is the trigger for the workflow
   push: # This is the trigger for the workflow
     branches: [main] # This is the branch that the workflow will run on
-    
+
   workflow_dispatch: # Manually trigger the workflow
 
 jobs: # This is the list of jobs that will be run
@@ -93,4 +93,3 @@ jobs: # This is the list of jobs that will be run
         uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # This is the token that will be used to deploy to GitHub Pages
-          publish_dir: dist # This is the directory that will be deployed
