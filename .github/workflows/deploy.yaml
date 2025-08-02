@@ -70,8 +70,8 @@ jobs: # This is the list of jobs that will be run
       - name: Upload Artifact
         uses: actions/upload-artifact@v4 # This is the action that will be run
         with: # This is the options for the action
-          - name: dist-files # This is the name of the artifact
-            path: dist # This is the path to the artifact
+          name: dist-files # This is the name of the artifact
+          path: dist # This is the path to the artifact
 
   deploy: # This is the name of the job
     needs: build # If this job needs another job to run, this is the job that will run first
